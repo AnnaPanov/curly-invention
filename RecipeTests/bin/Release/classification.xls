@@ -1,0 +1,214 @@
+# class	[pattern]	[priority]
+broccoli		
+radish		
+celery		
+spinach		
+lettuce		
+asparagus		
+onion	onion|scallion|shallot|leek	
+olive		
+cauliflower		
+avocado		
+cabbage (white)	cabbage	
+kale		
+soy		
+cucumber		
+squash (zucchini)	zucchini	
+garlic	garlic|adobo	
+pea (green)	pea	
+lentil		
+chili		
+bell pepper	(bell |green |yellow )pepper|(green |red |yellow |bell )peppers	
+artichoke		
+eggplant		
+potato (white)	potato	
+carrot		
+potato (sweet)	sweet potato|yam|yucca|yuca	
+tomato (red)	tomato	
+pumpkin		
+beet		
+edamame		
+kidney bean	bean	
+lima bean	lima	
+pinto bean	pinto	
+string bean	string	
+navy bean		
+sprouts		
+mint	mint|spearmint|peppermint	
+cilantro		
+cumin		
+salt		
+pepper	black pepper|fresh pepper|pepper	
+rosemary		
+thyme		
+coriander		
+fennel		
+mustard		
+chile	chile|chili	
+cayenne		
+oregano		
+paprika		
+ginger		
+lime		
+lemon		
+cranberry	cranberry|cranberries	
+mango		
+pineapple		
+plum		
+raspberry (red)	raspberry|raspberries	
+apple		
+apricot		
+pear		
+orange		
+peach		
+papaya		
+cantaloupe		
+cherry	cherry|cherries	
+watermelon		
+grape (red)	grape|raisin	
+grapefruit		
+banana		
+coconut		
+pecan		
+chestnut		
+walnut		
+sesame	sesame|tahini	
+pistachio		
+flaxseed		
+cashew		
+filbert	filbert|hazelnut	
+sunflower		
+peanut	peanut|nut	
+pine nut		
+almond		
+egg yolk	yolk	
+milk (goat)	goat milk|ricotta	
+cheese (cheddar)	cheese|cheddar|parmesan|gorgonzola|parmigiano|pecorino|provolone|brie|camembert|feta|queso fresco	
+egg white	egg|marshmallow	
+yogurt		
+whey		
+cheese (mozzarella)	mozzarella	
+cottage cheese		
+milk	milk|butter|cream|half and half|half & half|half&half|whip|buttermilk|whipped topping	
+lamb		
+turkey		
+veal		
+beef	brisket|steak|beef	1
+chicken		
+pork	ham|pork|bacon|pancetta|prosciutto	
+anchovy	anchovy|anchovies	
+tilapia		
+tuna (yellowfin)	tuna	
+salmon (pacific)	salmon	
+shrimp (western)	shrimp	
+red snapper	snapper	
+sole		
+halibut		
+scallop		
+clam (manila)	clam	
+lobster (american)	lobster	
+oyster		
+cod (atlantic)	cod	
+crab (dungeness)	crab	
+amaranth		
+buckwheat		
+millet		
+quinoa		
+farro		
+brown rice		
+corn	corn|cornstarch|cornbread	
+oat		
+rye		
+wheat (whole)	wheat|flour|bread|breadcrumbs|cracker|ciabatta|cake meal|noodles|linguine|granola	
+barley		
+spelt		
+kamut		
+rice (white)	rice	
+gliadin (wheat)		
+gluten (wheat)		
+cocoa		
+mushroom		
+coffee		
+sugar	sugar|agave|tapioca|syrup	
+vanilla		
+yeast (brewer's)		
+yeast (baker's)		
+honey		
+casein (milk)		
+salt and pepper		
+cooking spray		
+berries		
+ice		-1
+water		-1
+vegetable oil	vegetable oil|baking spray	
+oil	oil|canola|grapeseed	-1
+vinegar	vinegar|Worcestershire	
+baking powder		
+baking soda		
+semisweet chocolate		
+dark chocolate		
+chocolate		
+blueberry	blueberry|blueberries	
+blackberry	blackberry|blackberries	
+strawberry	strawberry|strawberries	
+white wine	wine|white wine	
+red wine		
+parsley		
+cinnamon		
+nutmeg		
+allspice		
+herbs de provence		
+red pepper	red pepper|sriracha|hot sauce|tabasco	
+pasta		
+bay leaf	bay (leaf|leaves)	
+argula	argula|arugula	
+basil		
+romaine		
+capers		
+mayonnaise	mayonnaise|mayo	
+date		
+squash	(yellow |spaghetti |turban |summer )?squash	
+sage		
+curry		
+parsnip		
+anise		
+turnip		
+dill		
+rutabaga		
+poppy	poppy|poppies	
+kiwi		
+chive		
+cooking fat		
+jalapeno	jalapeno|jalapeÃ±o	
+turmeric		
+applesauce		
+sazon		
+teriyaki sauce		
+panko crumbs	panko|crumbs	
+chia		
+baby greens		
+balsamic		
+marinara		
+seasoning		
+salsa		
+plantain		
+rum		
+vegetable broth		
+beer		
+achiote		
+watercress		
+vodka	absolut|vodka|gin	
+seltzer		
+bass		
+cloves		
+barbecue sauce		
+hemp seeds		
+endive		
+enchilada sauce		
+fish sauce		
+brandy		
+sherry		
+bok choy		
+squid		
+stevia		
+gelatin		

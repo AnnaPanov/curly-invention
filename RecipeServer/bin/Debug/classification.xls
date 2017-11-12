@@ -1,0 +1,214 @@
+# group	class	[pattern]	[priority]
+veggies	broccoli		
+starchy veggies	radish		
+veggies	celery		
+veggies	spinach		
+veggies	lettuce		
+veggies	asparagus		
+veggies	onion	onion|scallion|shallot|leek	
+veggies	olive		
+veggies	cauliflower		
+veggies	avocado		
+veggies	cabbage (white)	cabbage	
+veggies	kale		
+veggies	soy		
+veggies	cucumber		
+veggies	squash (zucchini)	zucchini	
+veggies	garlic	garlic|adobo	
+starchy veggies	pea (green)	pea	
+starchy veggies	lentil		
+veggies	chili		
+veggies	bell pepper	(bell |green |yellow )pepper|(green |red |yellow |bell )peppers	
+veggies	artichoke		
+veggies	eggplant		
+starchy veggies	potato (white)	potato	
+starchy veggies	carrot		
+starchy veggies	potato (sweet)	sweet potato|yam|yucca	
+veggies	tomato (red)	tomato	
+starchy veggies	pumpkin		
+starchy veggies	beet		
+veggies	edamame		
+veggies	kidney bean	bean	
+veggies	lima bean	lima	
+veggies	pinto bean	pinto	
+veggies	string bean	string	
+veggies	navy bean		
+veggies	sprouts		
+veggies	mint	mint|spearmint|peppermint	
+veggies	cilantro		
+herbs and spices	cumin		
+herbs and spices	salt		
+herbs and spices	pepper	black pepper|fresh pepper|pepper	
+herbs and spices	rosemary		
+herbs and spices	thyme		
+herbs and spices	coriander		
+herbs and spices	fennel		
+herbs and spices	mustard		
+herbs and spices	chile	chile|chili	
+herbs and spices	cayenne		
+herbs and spices	oregano		
+herbs and spices	paprika		
+herbs and spices	ginger		
+fruits and berries	lime		
+fruits and berries	lemon		
+fruits and berries	cranberry	cranberry|cranberries	
+fruits and berries	mango		
+fruits and berries	pineapple		
+fruits and berries	plum		
+fruits and berries	raspberry (red)	raspberry|raspberries	
+fruits and berries	apple		
+fruits and berries	apricot		
+fruits and berries	pear		
+fruits and berries	orange		
+fruits and berries	peach		
+fruits and berries	papaya		
+fruits and berries	cantaloupe		
+fruits and berries	cherry	cherry|cherries	
+fruits and berries	watermelon		
+fruits and berries	grape (red)	grape|raisin	
+fruits and berries	grapefruit		
+fruits and berries	banana		
+nuts and legumes	coconut		
+nuts and legumes	pecan		
+nuts and legumes	chestnut		
+nuts and legumes	walnut		
+nuts and legumes	sesame	sesame|tahini	
+nuts and legumes	pistachio		
+nuts and legumes	flaxseed		
+nuts and legumes	cashew		
+nuts and legumes	filbert	filbert|hazelnut	
+nuts and legumes	sunflower		
+nuts and legumes	peanut	peanut|nut	
+nuts and legumes	pine nut		
+nuts and legumes	almond		
+eggs	egg yolk	yolk	
+dairy	milk (goat)	goat milk|ricotta	
+dairy	cheese (cheddar)	cheese|cheddar|parmesan|gorgonzola|parmigiano|pecorino|provolone|brie|camembert|feta|queso fresco	
+dairy	egg white	egg|marshmallow	
+dairy	yogurt		
+grains	whey		
+dairy	cheese (mozzarella)	mozzarella	
+dairy	cottage cheese		
+dairy	milk	milk|butter|cream|half and half|half & half|half&half|whip|buttermilk|whipped topping	
+meats	lamb		
+meats	turkey		
+meats	veal		
+meats	beef	brisket|steak|beef	1
+meats	chicken		
+meats	pork	ham|pork|bacon|pancetta|prosciutto	
+seafood	anchovy	anchovy|anchovies	
+seafood	tilapia		
+seafood	tuna (yellowfin)	tuna	
+seafood	salmon (pacific)	salmon	
+seafood	shrimp (western)	shrimp	
+seafood	red snapper	snapper	
+seafood	sole		
+seafood	halibut		
+seafood	scallop		
+seafood	clam (manila)	clam	
+seafood	lobster (american)	lobster	
+seafood	oyster		
+seafood	cod (atlantic)	cod	
+seafood	crab (dungeness)	crab	
+grains	amaranth		
+grains	buckwheat		
+grains	millet		
+grains	quinoa		
+grains	farro		
+grains	brown rice		
+grains	corn	corn|cornstarch|cornbread	
+grains	oat		
+grains	rye		
+grains	wheat (whole)	wheat|flour|bread|breadcrumbs|cracker|ciabatta|cake meal|noodles|linguine|granola	
+grains	barley		
+grains	spelt		
+grains	kamut		
+grains	rice (white)	rice	
+grains	gliadin (wheat)		
+grains	gluten (wheat)		
+other	cocoa		
+other	mushroom		
+other	coffee		
+other	sugar	sugar|agave|tapioca|syrup	
+other	vanilla		
+other	yeast (brewer's)		
+other	yeast (baker's)		
+other	honey		
+dairy	casein (milk)		
+herbs and spices	salt and pepper		
+oils	cooking spray		
+fruits and berries	berries		
+other	ice		-1
+other	water		-1
+other	vegetable oil	vegetable oil|baking spray	
+other	oil	oil|canola|grapeseed	-1
+other	vinegar	vinegar|Worcestershire	
+other	baking powder		
+other	baking soda		
+other	semisweet chocolate		
+other	dark chocolate		
+other	chocolate		
+fruits and berries	blueberry	blueberry|blueberries	
+fruits and berries	blackberry	blackberry|blackberries	
+fruits and berries	strawberry	strawberry|strawberries	
+other	white wine	wine|white wine	
+other	red wine		
+fruits and berries	parsley		
+fruits and berries	cinnamon		
+fruits and berries	nutmeg		
+fruits and berries	allspice		
+fruits and berries	herbs de provence		
+fruits and berries	red pepper	red pepper|sriracha|hot sauce|tabasco	
+other	pasta		
+herbs and spices	bay leaf	bay (leaf|leaves)	
+herbs and spices	argula	argula|arugula	
+herbs and spices	basil		
+veggies	romaine		
+veggies	capers		
+other	mayonnaise	mayonnaise|mayo	
+fruits and berries	date		
+starchy veggies	squash	(yellow |spaghetti |turban |summer )?squash	
+herbs and spices	sage		
+herbs and spices	curry		
+starchy veggies	parsnip		
+herbs and spices	anise		
+starchy veggies	turnip		
+herbs and spices	dill		
+starchy veggies	rutabaga		
+herbs and spices	poppy	poppy|poppies	
+fruits and berries	kiwi		
+herbs and spices	chive		
+oils	cooking fat		
+veggies	jalapeno	jalapeno|jalapeÃ±o	
+herbs and spices	turmeric		
+other	applesauce		
+herbs and spices	sazon		
+herbs and spices	teriyaki sauce		
+grains	panko crumbs	panko|crumbs	
+grains	chia		
+veggies	baby greens		
+other	balsamic		
+other	marinara		
+other	seasoning		
+other	salsa		
+starchy veggies	plantain		
+other	rum		
+other	vegetable broth		
+other	beer		
+herbs and spices	achiote		
+herbs and spices	watercress		
+other	vodka	absolut|vodka|gin	
+other	seltzer		
+seafood	bass		
+herbs and spices	cloves		
+other	barbecue sauce		
+nuts and legumes	hemp seeds		
+veggies	endive		
+other	enchilada sauce		
+other	fish sauce		
+other	brandy		
+other	sherry		
+veggies	bok choy		
+seafood	squid		
+other	stevia		
+other	gelatin		

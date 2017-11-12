@@ -1,0 +1,215 @@
+# class	type	group
+broccoli	broccoli	green leafy veggies
+radish	radish	veggies
+celery	celery	green leafy veggies
+spinach	spinach	green leafy veggies
+lettuce	lettuce	green leafy veggies
+asparagus	asparagus	veggies
+onion	onion	veggies
+olive	olive	oil
+cauliflower	cauliflower	green leafy veggies
+avocado	avocado	veggies
+cabbage (white)	cabbage	veggies
+kale	kale	green leafy veggies
+soy	soy	veggies
+cucumber	cucumber	veggies
+squash (zucchini)	squash	veggies
+garlic	garlic	veggies
+pea (green)	pea	veggies
+lentil	lentil	veggies
+chili	chili	veggies
+bell pepper	bell pepper	veggies
+artichoke	artichoke	veggies
+eggplant	eggplant	starchy veggies
+potato (white)	potato	starchy veggies
+carrot	carrot	starchy veggies
+potato (sweet)	potato	starchy veggies
+tomato (red)	tomato	veggies
+pumpkin	pumpkin	veggies
+beet	beet	veggies
+edamame	edamame	veggies
+kidney bean	kidney bean	veggies
+lima bean	lima bean	veggies
+pinto bean	pinto bean	veggies
+string bean	string bean	veggies
+navy bean	navy bean	veggies
+sprouts	sprouts	veggies
+mint	mint	spices
+cilantro	cilantro	green leafy veggies
+cumin	cumin	spices
+salt	salt	spices
+pepper	pepper	spices
+rosemary	rosemary	spices
+thyme	thyme	spices
+coriander	coriander	spices
+fennel	fennel	spices
+mustard	mustard	spices
+chile	chile	spices
+cayenne	cayenne	spices
+oregano	oregano	spices
+paprika	paprika	spices
+ginger	ginger	spices
+lime	lime	fruit
+lemon	lemon	fruit
+cranberry	cranberry	fruit
+mango	mango	fruit
+pineapple	pineapple	fruit
+plum	plum	fruit
+raspberry (red)	raspberry	fruit
+apple	apple	fruit
+apricot	apricot	fruit
+pear	pear	fruit
+orange	orange	fruit
+peach	peach	fruit
+papaya	papaya	fruit
+cantaloupe	cantaloupe	fruit
+cherry	cherry	fruit
+watermelon	watermelon	fruit
+grape (red)	grape	fruit
+grapefruit	grapefruit	fruit
+banana	banana	fruit
+coconut	coconut	nut
+pecan	pecan	nut
+chestnut	chestnut	nut
+walnut	walnut	nut
+sesame	sesame	nut
+pistachio	pistachio	nut
+flaxseed	flaxseed	nut
+cashew	cashew	nut
+filbert	filbert	nut
+sunflower	sunflower	nut
+peanut	peanut	nut
+pine nut	pine nut	nut
+almond	almond	nut
+egg yolk	egg yolk	eggs
+milk (goat)	milk goat	dairy
+milk (sheep)	milk sheep	dairy
+cheese (cheddar)	cheese	dairy
+egg white	egg white	eggs
+yogurt	yogurt	dairy
+whey	whey	dairy
+cheese (mozzarella)	cheese	dairy
+cottage cheese	cheese	dairy
+milk	milk	dairy
+lamb	lamb	"meat, poultry"
+turkey	turkey	"meat, poultry"
+veal	veal	"meat, poultry"
+beef	beef	"meat, poultry"
+chicken	chicken	"meat, poultry"
+pork	pork	"meat, poultry"
+anchovy	anchovy	fish
+tilapia	tilapia	fish
+tuna (yellowfin)	tuna	fish
+salmon (pacific)	salmon	fish
+shrimp (western)	shrimp	seafood
+red snapper	snapper	fish
+sole	sole	fish
+halibut	halibut	fish
+scallop	scallop	seafood
+clam (manila)	clam	seafood
+lobster (american)	lobster	seafood
+oyster	oyster	seafood
+cod (atlantic)	cod	fish
+crab (dungeness)	crab	seafood
+amaranth	amaranth	grains
+buckwheat	buckwheat	grains
+millet	millet	grains
+quinoa	quinoa	grains
+farro	farro	grains
+brown rice	brown rice	grains
+corn	corn	grains
+oat	oat	grains
+rye	rye	grains
+wheat (whole)	wheat	grains
+barley	barley	grains
+spelt	spelt	grains
+kamut	kamut	grains
+rice (white)	rice	grains
+gliadin (wheat)	wheat	grains
+gluten (wheat)	wheat	grains
+cocoa	cocoa	other
+mushroom	mushroom	other
+coffee	coffee	other
+sugar	sugar	other
+vanilla	vanilla	other
+yeast (brewer's)	yeast (brewer's)	other
+yeast (baker's)	yeast (baker's)	other
+honey	honey	other
+casein (milk)	milk	dairy
+salt and pepper	salt and pepper	spices
+cooking spray	oil	oil
+berries	berries	fruit
+ice	water	other
+water	water	other
+vegetable oil	oil	oil
+oil	oil	oil
+vinegar	vinegar	other
+baking powder	baking soda	other
+baking soda	baking soda	other
+semisweet chocolate	chocolate	other
+dark chocolate	chocolate	other
+chocolate	chocolate	other
+blueberry	berries	fruit
+blackberry	berries	fruit
+strawberry	berries	fruit
+white wine	alcohol	other
+red wine	alcohol	other
+parsley	parsley	green leafy veggies
+cinnamon	spice	spices
+nutmeg	spice	spices
+allspice	spice	spices
+herbs de provence	spice	spices
+red pepper	spice	spices
+pasta	wheat	grains
+bay leaf	spice	spices
+argula	argula	green leafy veggies
+basil	basil	green leafy veggies
+romaine	romaine	green leafy veggies
+capers	pickles	veggies
+mayonnaise	egg yolk	eggs
+date	date	other
+squash	squash	veggies
+sage	spice	spices
+curry	spice	spices
+parsnip	parsnip	starchy veggies
+anise	spice	spices
+turnip	turnip	veggies
+dill	dill	spices
+rutabaga	rutabaga	starchy veggies
+poppy	spice	spices
+kiwi	kiwi	fruit
+chive	chive	green leafy veggies
+cooking fat	oil	oil
+jalapeno	jalapeno	veggies
+turmeric	spice	spices
+applesauce	sweet sauce	other
+sazon	spice	spices
+teriyaki sauce	sauce	other
+panko crumbs	wheat	grains
+chia	chia	grains
+baby greens	baby greens	veggies
+balsamic	acidic sauce	other
+marinara	tomato	veggies
+seasoning	spice	spices
+salsa	salsa	other
+plantain	plantain	starchy veggies
+rum	alcohol	other
+vegetable broth	water	other
+beer	alcohol	other
+achiote	achiote	spices
+watercress	watercress	green leafy veggies
+vodka	alcohol	other
+seltzer	water	other
+bass	white fish	fish
+cloves	spice	spices
+barbecue sauce	sweet sauce	other
+hemp seeds	hemp	spices
+endive	endive	green leafy veggies
+enchilada sauce	sweet sauce	other
+fish sauce	sauce	other
+brandy	alcohol	other
+sherry	alcohol	other
+bok choy	bok choy	green leafy veggies
+squid	squid	seafood
+stevia	stevia	spices
+gelatin	pork	"meat, poultry"
