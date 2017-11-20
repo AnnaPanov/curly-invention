@@ -28,7 +28,13 @@ namespace RecipeServer
             if (request.Url.LocalPath == "/recipes_api")
                 return RecipeJsonPage(request, result, session);
             if (request.Url.LocalPath == "/recognize_preferences_api")
-                return RecognizePreferencePage(request, result, session);
+                return RecognizePreferenceRequestPage(request, result, session);
+            if (request.Url.LocalPath == "/recognized_preferences")
+                return RecognizePreferencesResultPage(request, result, session);
+            if (request.Url.LocalPath == "/recognize_manually")
+                return RecognizePreferencesManualProcessPage(request, result, session);
+            if (request.Url.LocalPath == "/preference_image")
+                return PreferenceImage(request, result, session);
             if (request.Url.LocalPath == "/login")
                 return LoginPage(request, result, session);
             // if not logged in, redirect to login
@@ -92,18 +98,67 @@ namespace RecipeServer
             return buffer.ToString();
         }
 
-        static string RecognizePreferencePage(HttpListenerRequest request, HttpListenerResponse result, SessionInfo session)
+        static string PreferenceImage(HttpListenerRequest request, HttpListenerResponse result, SessionInfo session)
         {
-            Console.WriteLine("RecognizePreferencePage request");
+            var getArgs = HttpUtility.ParseQueryString(request.Url.Query);
+            string requestId = getArgs["requestId"];
+            if (null == requestId)
+                return "{ response : {\n error : \"requestId is not specified\"\n} }";
+            PreferenceInfo p = preferences_[requestId];
+            if (null == p)
+                return "{ response : {\n error : \"requestId " + requestId + " is not found\"\n} }";
+            if (null == p.HaveImage)
+                return "{ response : {\n error : \"requestId " + requestId + " does not have an uploaded image\"\n} }";
+            if (!System.IO.File.Exists(p.HaveImage))
+                return "{ response : {\n error : \"requestId " + requestId + " does not have a file with uploaded image\"\n} }";
+            byte[] content = File.ReadAllBytes(p.HaveImage);
+            result.ContentType = "image/jpeg";
+            result.ContentEncoding = Encoding.UTF8;
+            result.ContentLength64 = content.Length;
+            result.OutputStream.Write(content, 0, content.Length);
+            return null;
+        }
+
+        static string RecognizePreferencesManualProcessPage(HttpListenerRequest request, HttpListenerResponse result, SessionInfo session)
+        {
+            var unrecognizedYet = preferences_.WithUnrecognizedImages();
+            if (unrecognizedYet.Count == 0)
+                return "No more preferences to recognize!";
+            var recognizeMe = unrecognizedYet.FirstOrDefault();
+            return PreferencePage(request, result, recognizeMe.Key, recognizeMe.Value);
+        }
+
+        static string RecognizePreferencesResultPage(HttpListenerRequest request, HttpListenerResponse result, SessionInfo session)
+        {
+            var getArgs = HttpUtility.ParseQueryString(request.Url.Query);
+            string requestId = getArgs["requestId"];
+            if (requestId == null)
+                return "{ response : {\n error : \"requestId not specified\"\n} }";
+            PreferenceInfo recognized = preferences_[requestId];
+            if (recognized == null)
+                return "{ response : {\n   status : \"requestId not found\",\n   requestId : \"" + requestId + "\"\n} }";
+            if (recognized.IngredientPreferences == null)
+                return "{ response : {\n   status : \"pending\",\n   requestId : \"" + requestId + "\"\n} }";
+            StringBuilder prefs = new StringBuilder();
+            prefs.Append("{ preferences = {\n");
+            foreach (Preference p in recognized.IngredientPreferences)
+                prefs.AppendFormat("  \"{0}\" : \"{1}\",\n", p.Ingredient, p.Score);
+            prefs.Append("} }\n");
+            return "{ response : {\n   status : \"completed\",\n   requestId : \"" + requestId + "\",\n   result : " + prefs.ToString() + "\n} }";
+        }
+
+        static string RecognizePreferenceRequestPage(HttpListenerRequest request, HttpListenerResponse result, SessionInfo session)
+        {
             if (request.ContentType != null)
             {
-                SaveFile(request.ContentEncoding, GetBoundary(request.ContentType), request.InputStream);
-                return "http://blah.com/" + Guid.NewGuid().ToString();
+                string username = preferences_.SaveImageFile(request.ContentEncoding, GetBoundary(request.ContentType), request.InputStream);
+                return "/recognized_preferences?requestId=" + username;
             }
             return
                 "<html><body><br>\n" +
-                "<form method=post>\n" +
+                "<form method=post enctype=\"multipart/form-data\">\n" +
                 "test results:<input name=testResults type=file>" +
+                "<input type=hidden name='id' value='unset'>" +
                 "<input type=submit>\n" +
                 "</form>\n" +
                 "</body></html>";
@@ -235,7 +290,7 @@ namespace RecipeServer
 <body style='font-family:tahoma,arial,sans-serif;'>
 <fieldset>
 ");
-            AddLegend(session, buffer);
+            AddLegend(session.User.Username, buffer);
             foreach (var recipe in rankedRecipes)
             {
                 var owp = recipe.Recipe.Recipe.OriginalWebPage;
@@ -342,10 +397,14 @@ namespace RecipeServer
             PreferenceInfo preferences = preferences_[session.User.Username];
             if (null == preferences)
                 preferences = new PreferenceInfo();
+            return PreferencePage(request, result, session.User.Username, preferences);
+        }
 
+        static string PreferencePage(HttpListenerRequest request, HttpListenerResponse result, string username, PreferenceInfo preferences)
+        {
             // saving preferences?
             if (request.HttpMethod.ToUpper() == "POST")
-                return TrySavePreferences(request, session, preferences);
+                return TrySavePreferences(request, username, preferences);
 
             // if logged in, discuss preferences
             StringBuilder buffer = new StringBuilder();
@@ -359,8 +418,11 @@ namespace RecipeServer
 @"
 <form method=post>
 <fieldset>");
-            AddLegend(session, buffer);
+            if (preferences.IngredientPreferences != null)
+                AddLegend(username, buffer);
+            else buffer.Append("<legend>[ requestId : " + username + " ]</legend>\n");
             buffer.Append(@"
+<input type=hidden id='username' value='" + username.Replace("'", "\'") + @"'>
 <input type=submit id='savePreferences' name='savePreferences' value='Save Preferences' disabled/>
 <script>
 var nChanges = 0
@@ -377,8 +439,11 @@ function onPrefModified(which,label) {
 ");
             {
                 Dictionary<string, int> preferenceLookup = new Dictionary<string, int>();
-                foreach (var p in preferences.IngredientPreferences)
-                    preferenceLookup[p.Ingredient] = p.Score;
+                if (preferences.IngredientPreferences != null)
+                {
+                    foreach (var p in preferences.IngredientPreferences)
+                        preferenceLookup[p.Ingredient] = p.Score;
+                }
                 buffer.AppendLine("<table cellpadding=2 border=0><tr>");
                 foreach (var column in ingredientsAsColumns_)
                 {
@@ -418,13 +483,17 @@ function onPrefModified(which,label) {
             buffer.Append(@"
 </fieldset>
 </form>
+");
+            if (preferences.HaveImage != null)
+                buffer.Append("<img onclick='window.open(\"/preference_image?requestId=" + username + "\", \"_blank\", \"toolbar=no,scrollbars=yes,resizable=yes,top=10,left=10\");' src=\"/preference_image?requestId=" + username + "\">\n");
+            buffer.Append(@"
 </body>
 </html>
 ");
             return buffer.ToString();
         }
 
-        private static void AddLegend(SessionInfo session, StringBuilder buffer)
+        private static void AddLegend(string username, StringBuilder buffer)
         {
             buffer.Append(@"
 <legend>")
@@ -434,7 +503,7 @@ function onPrefModified(which,label) {
 <a href=/recipes?strictness=3>balanced recipes</a> |
 <a href=/recipes?strictness=0.3>fun recipes</a> |
 <a href=/preferences>preferences</a> |
-<a href=/logout>logout (" + session.User + @")</a>
+<a href=/logout>logout (" + username + @")</a>
  ]")
 .AppendLine("</td></tr></table>")
 .AppendLine(@"</legend>");
@@ -471,15 +540,18 @@ function onPrefModified(which,label) {
             return columnContents;
         }
 
-        private static string TrySavePreferences(HttpListenerRequest request, SessionInfo session, PreferenceInfo preferences)
+        private static string TrySavePreferences(HttpListenerRequest request, string username, PreferenceInfo preferences)
         {
             var args = GetPostArgs(request);
             try
             {
                 var savingPreferences = args["savePreferences"];
                 Dictionary<string, int> preferenceLookup = new Dictionary<string, int>();
-                foreach (var p in preferences.IngredientPreferences)
-                    preferenceLookup[p.Ingredient] = p.Score;
+                if (preferences.IngredientPreferences != null)
+                {
+                    foreach (var p in preferences.IngredientPreferences)
+                        preferenceLookup[p.Ingredient] = p.Score;
+                }
                 foreach (string key in args.Keys)
                 {
                     if (!key.StartsWith("pref_"))
@@ -490,7 +562,7 @@ function onPrefModified(which,label) {
                 preferences.IngredientPreferences = new List<Preference>();
                 foreach (var p in preferenceLookup)
                     preferences.IngredientPreferences.Add(new Preference { Ingredient = p.Key, Score = p.Value });
-                preferences_[session.User.Username] = preferences;
+                preferences_[username] = preferences;
                 return "<html><head><meta http-equiv=refresh content='0'/></head></html>";
             }
             catch (Exception e)
@@ -544,104 +616,6 @@ function onPrefModified(which,label) {
         private static String GetBoundary(String ctype)
         {
             return "--" + ctype.Split(';')[1].Split('=')[1];
-        }
-
-        private static void SaveFile(Encoding enc, String boundary, Stream input)
-        {
-            Byte[] boundaryBytes = enc.GetBytes(boundary);
-            Int32 boundaryLen = boundaryBytes.Length;
-
-            using (FileStream output = new FileStream("data.jpg", FileMode.Create, FileAccess.Write))
-            {
-                Byte[] buffer = new Byte[1024];
-                Int32 len = input.Read(buffer, 0, 1024);
-                Int32 startPos = -1;
-
-                // Find start boundary
-                while (true)
-                {
-                    if (len == 0)
-                    {
-                        throw new Exception("Start Boundaray Not Found");
-                    }
-
-                    startPos = IndexOf(buffer, len, boundaryBytes);
-                    if (startPos >= 0)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Array.Copy(buffer, len - boundaryLen, buffer, 0, boundaryLen);
-                        len = input.Read(buffer, boundaryLen, 1024 - boundaryLen);
-                    }
-                }
-
-                // Skip four lines (Boundary, Content-Disposition, Content-Type, and a blank)
-                for (Int32 i = 0; i < 4; i++)
-                {
-                    while (true)
-                    {
-                        if (len == 0)
-                        {
-                            throw new Exception("Preamble not Found.");
-                        }
-
-                        startPos = Array.IndexOf(buffer, enc.GetBytes("\n")[0], startPos);
-                        if (startPos >= 0)
-                        {
-                            startPos++;
-                            break;
-                        }
-                        else
-                        {
-                            len = input.Read(buffer, 0, 1024);
-                        }
-                    }
-                }
-
-                Array.Copy(buffer, startPos, buffer, 0, len - startPos);
-                len = len - startPos;
-
-                while (true)
-                {
-                    Int32 endPos = IndexOf(buffer, len, boundaryBytes);
-                    if (endPos >= 0)
-                    {
-                        if (endPos > 0) output.Write(buffer, 0, endPos - 2);
-                        break;
-                    }
-                    else if (len <= boundaryLen)
-                    {
-                        throw new Exception("End Boundaray Not Found");
-                    }
-                    else
-                    {
-                        output.Write(buffer, 0, len - boundaryLen);
-                        Array.Copy(buffer, len - boundaryLen, buffer, 0, boundaryLen);
-                        len = input.Read(buffer, boundaryLen, 1024 - boundaryLen) + boundaryLen;
-                    }
-                }
-            }
-        }
-
-        private static Int32 IndexOf(Byte[] buffer, Int32 len, Byte[] boundaryBytes)
-        {
-            for (Int32 i = 0; i <= len - boundaryBytes.Length; i++)
-            {
-                Boolean match = true;
-                for (Int32 j = 0; j < boundaryBytes.Length && match; j++)
-                {
-                    match = buffer[i + j] == boundaryBytes[j];
-                }
-
-                if (match)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
         }
 
         static void Main(string[] args)
