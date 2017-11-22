@@ -25,30 +25,38 @@ namespace RecipeServer
 
         static string DispatchWebPage(HttpListenerRequest request, HttpListenerResponse result, SessionInfo session)
         {
-            if (request.Url.LocalPath == "/recipes_api")
-                return RecipeJsonPage(request, result, session);
-            if (request.Url.LocalPath == "/recognize_preferences_api")
-                return RecognizePreferenceRequestPage(request, result, session);
-            if (request.Url.LocalPath == "/recognized_preferences")
-                return RecognizePreferencesResultPage(request, result, session);
-            if (request.Url.LocalPath == "/recognize_manually")
-                return RecognizePreferencesManualProcessPage(request, result, session);
-            if (request.Url.LocalPath == "/preference_image")
-                return PreferenceImage(request, result, session);
-            if (request.Url.LocalPath == "/login")
-                return LoginPage(request, result, session);
-            // if not logged in, redirect to login
-            if (null == session.User)
-                return "<html><head><meta http-equiv=refresh content='0;URL=/login'/></head></html>";
-
-            // otherwise, display something
-            switch (request.Url.LocalPath)
+            try
             {
-                case "/recipes":
-                    return RecipePage(request, result, session);
-                case "/preferences":
-                default:
-                    return PreferencePage(request, result, session);
+                if (request.Url.LocalPath == "/recipes_api")
+                    return RecipeJsonPage(request, result, session);
+                if (request.Url.LocalPath == "/recognize_preferences_api")
+                    return RecognizePreferenceRequestPage(request, result, session);
+                if (request.Url.LocalPath == "/recognized_preferences")
+                    return RecognizePreferencesResultPage(request, result, session);
+                if (request.Url.LocalPath == "/recognize_manually")
+                    return RecognizePreferencesManualProcessPage(request, result, session);
+                if (request.Url.LocalPath == "/preference_image")
+                    return PreferenceImage(request, result, session);
+                if (request.Url.LocalPath == "/login")
+                    return LoginPage(request, result, session);
+                // if not logged in, redirect to login
+                if (null == session.User)
+                    return "<html><head><meta http-equiv=refresh content='0;URL=/login'/></head></html>";
+
+                // otherwise, display something
+                switch (request.Url.LocalPath)
+                {
+                    case "/recipes":
+                        return RecipePage(request, result, session);
+                    case "/preferences":
+                    default:
+                        return PreferencePage(request, result, session);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.ToString());
+                return e.ToString();
             }
         }
 
@@ -133,18 +141,18 @@ namespace RecipeServer
             var getArgs = HttpUtility.ParseQueryString(request.Url.Query);
             string requestId = getArgs["requestId"];
             if (requestId == null)
-                return "{ response : {\n error : \"requestId not specified\"\n} }";
+                return "{ \"response\" : {\n \"error\" : \"requestId not specified\"\n} }";
             PreferenceInfo recognized = preferences_[requestId];
             if (recognized == null)
-                return "{ response : {\n   status : \"requestId not found\",\n   requestId : \"" + requestId + "\"\n} }";
+                return "{ \"response\" : {\n   \"status\" : \"requestId not found\",\n   \"requestId\" : \"" + requestId + "\"\n} }";
             if (recognized.IngredientPreferences == null)
-                return "{ response : {\n   status : \"pending\",\n   requestId : \"" + requestId + "\"\n} }";
+                return "{ \"response\" : {\n   \"status\" : \"pending\",\n   \"requestId\" : \"" + requestId + "\"\n} }";
             StringBuilder prefs = new StringBuilder();
-            prefs.Append("{ preferences = {\n");
+            prefs.Append("{ \"preferences\" = {\n");
             foreach (Preference p in recognized.IngredientPreferences)
                 prefs.AppendFormat("  \"{0}\" : \"{1}\",\n", p.Ingredient, p.Score);
             prefs.Append("} }\n");
-            return "{ response : {\n   status : \"completed\",\n   requestId : \"" + requestId + "\",\n   result : " + prefs.ToString() + "\n} }";
+            return "{ \"response\" : {\n   \"status\" : \"completed\",\n   \"requestId\" : \"" + requestId + "\",\n   \"result\" : " + prefs.ToString() + "\n} }";
         }
 
         static string RecognizePreferenceRequestPage(HttpListenerRequest request, HttpListenerResponse result, SessionInfo session)
